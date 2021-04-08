@@ -1,8 +1,10 @@
 .data
 
 .balign 4
-readfile: .asciz "myfile.txt"
+pattern: .asciz "%14[^\n]%*c"
 
+.balign 4
+input: .asciz "Enter your input file: "
 
 .balign 4
 readmode: .asciz "rb"
@@ -31,7 +33,8 @@ printformat: .asciz "%li\n"
 .balign 32
 a: .space 4096
 
-
+.balign 4
+	filename: .space 16
 .text
 
 .global main
@@ -41,16 +44,30 @@ a: .space 4096
 .global fscanf
 .global printf
 .global feof
+.global scanf
 
 main:
         ldr r1, =return
         str lr, [r1]
-        ldr r0, =readfile
+
+	ldr r0, =input
+	bl printf
+
+	ldr r0, addr_of_pattern
+	ldr r1, addr_of_filename
+	bl scanf
+
+	ldr r0, addr_of_filename
+        
+
         ldr r1, =readmode
         bl fopen
+	
         mov r4, r0
+
         mov r5, #0
         ldr r6, =a
+	
 
 loop:
 	mov r0, r4
@@ -118,10 +135,6 @@ increment:
     str r8, [r12] /* # stores value of first parser where min was !!!!!*/
     str r7, [r11] /*# store value of min where first parser was !!!!!*/
 
-    ldr r0, =printformat
-    ldr r1, [r11]
-    
-    bl printf	
     add r5, r5, #4 /*#increment the first parser*/
     b loop3 /*#go to loop1*/
 
@@ -153,3 +166,7 @@ end:
         ldr lr, =return
         ldr lr, [lr]
         bx lr
+
+
+addr_of_pattern: .word pattern
+addr_of_filename: .word filename
