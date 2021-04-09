@@ -77,8 +77,7 @@ readloop:
 
 // A selection sort is used to sort the contents of the array that were read from the input file.
 // The sorting algorithm sorts positive and negative integers in an ascending order. 
-sort:
-    
+sort:    
     SUB r9, r5, #4 	/* stores length of array */
     mov r5, #0  	/* array parser for first loop */
     mov r6, #0  	/* stores index of minimum */
@@ -161,7 +160,6 @@ end:
         ldr lr, =return
         ldr lr, [lr]
         bx lr
-
 
 addr_of_pattern: .word pattern
 addr_of_filename: .word filename
