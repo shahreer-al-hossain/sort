@@ -7,7 +7,7 @@
 .balign 4
         finished: .asciz "\nThe file is successfully sorted. Please check the contents of output.txt.\n\n"
 .balign 4
-        badopenmsg: .asciz "This file cannot be opended. Please check if the name of the file in entered correctly and if the file exists in the same directory.\n"
+        badopenmsg: .asciz "This file cannot be opended. Please check if the name of the file is entered correctly and if the file exists in the same directory.\n"
 .balign 4
 	tooLarge: .asciz "This file has more than 1024 integers. Please reduce the size of your list.\n"
 .balign 4
