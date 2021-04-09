@@ -184,14 +184,11 @@ badopen:
         bx lr
 
 SizeError:
-        mov r0, r4
-        bl fclose
-
         ldr r0, =tooLarge
         bl printf
-
         ldr lr, =return
         ldr lr, [lr]
         bx lr
+	
 addr_of_pattern: .word pattern
 addr_of_filename: .word filename
