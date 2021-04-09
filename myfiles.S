@@ -160,7 +160,6 @@ writeloop:
         add r6, r6, #4
         b writeloop
 
-
 // The link register is restored.
 // The output file is closed using the fclose C function. 
 end:
