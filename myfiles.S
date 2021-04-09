@@ -184,6 +184,8 @@ badopen:
         bx lr
 
 SizeError:
+        mov r0, r4
+        bl fclose
         ldr r0, =tooLarge
         bl printf
         ldr lr, =return
