@@ -9,6 +9,8 @@
 .balign 4
         badopenmsg: .asciz "\This file cannot be opended. Please check if the name of the file in entered correctly and if the file exists in the same directory.\n"
 .balign 4
+	tooLarge: .asciz "This file has more than 1024 numbers. Please reduce the size of your list.\n"
+.balign 4
         readmode: .asciz "rb"
 .balign 4
         writefile: .asciz "output.txt"
@@ -46,6 +48,7 @@ main:
 
         ldr r0, =input
         bl printf
+	
 
 // Scanning in the name of the input file
         ldr r0, addr_of_pattern
@@ -79,6 +82,8 @@ readloop:
         bl feof
         cmp r0, #0
         bne sort
+	cmp r5, #4096
+	bgt SizeError
         mov r0, r4
         ldr r1, =scanformat
         mov r2, r6
@@ -178,6 +183,15 @@ badopen:
         ldr lr, [lr]
         bx lr
 
+SizeError:
+        mov r0, r4
+        bl fclose
 
+        ldr r0, =tooLarge
+        bl printf
+
+        ldr lr, =return
+        ldr lr, [lr]
+        bx lr
 addr_of_pattern: .word pattern
 addr_of_filename: .word filename
