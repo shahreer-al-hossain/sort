@@ -60,7 +60,7 @@ main:
 
 // A while loop is used to read the contents of the input file. 
 // The fscanf function is used to read the file line by line.
-// The feof C function reutrn a non-zero number to register r0 when the end of the file is reached.
+// The feof C function reutrns a non-zero number to register r0 when the end of the file is reached.
 // The return code of feof is used as the loop condition for the while loop.  
 readloop:
 	mov r0, r4
